@@ -2,7 +2,7 @@
   "cloudflare_fullstack": {
     "url": "https://trusted-psi-discs-vhs.trycloudflare.com",
     "reachable": true,
-    "frames_streamed": 171,
+    "frames_streamed": 162,
     "transport_badge": "HIL VIRTUAL SIM",
     "badge_matched": true,
     "console_errors": [],
@@ -14,9 +14,7 @@
     "frames_streamed": 18,
     "transport_badge": "CLOUD WEB-HIL SIM",
     "badge_matched": true,
-    "console_errors": [
-      "Failed to load resource: the server responded with a status of 404 ()"
-    ],
+    "console_errors": [],
     "screenshot": "C:\\Users\\DELL INSPIRON 5515\\.gemini\\antigravity\\scratch\\embedded_hil_studio\\artifacts\\gui_audit\\deploy_02_github_pages_24x7_live.png"
   }
 }

@@ -76,9 +76,14 @@ def compile_and_verify_firmware(
     build_dir.mkdir(parents=True, exist_ok=True)
     exe_ext = ".exe" if os.name == "nt" else ""
 
-    test_bin = build_dir / f"unit_tests{exe_ext}"
+    test_bin = build_dir / f"unit_tests_{os.getpid()}{exe_ext}"
     hil_bin = build_dir / f"firmware_hil{exe_ext}"
-    mcu_obj = build_dir / "mcu_hal_check.o"
+    if hil_bin.exists():
+        try:
+            hil_bin.unlink()
+        except PermissionError:
+            hil_bin = build_dir / f"firmware_hil_{os.getpid()}{exe_ext}"
+    mcu_obj = build_dir / f"mcu_hal_check_{os.getpid()}.o"
 
     common_flags = [
         gpp,
