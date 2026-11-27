@@ -1,0 +1,214 @@
+peripherals:
+  SHT31-D:
+    part_number: SHT31-D
+    name: Sensirion SHT31-D Temp/RH Sensor
+    category: sensor
+    supply_voltage: 3.3
+    logic_voltage: 3.3
+    idle_current_ma: 0.2
+    active_current_ma: 1.2
+    peak_current_ma: 1.8
+    duty_cycle: 0.25
+    bus_type: I2C
+    i2c_address: "0x44"
+    signals:
+      - {signal_name: SDA, required_capability: I2C_SDA, direction: inout, shared_bus: I2C0}
+      - {signal_name: SCL, required_capability: I2C_SCL, direction: out, shared_bus: I2C0}
+
+  SOIL_ADC_PROBE:
+    part_number: CAPACITIVE_MOISTURE_V1_2
+    name: Capacitive Substrate Moisture Probe
+    category: sensor
+    supply_voltage: 3.3
+    logic_voltage: 3.3
+    idle_current_ma: 4.5
+    active_current_ma: 5.0
+    peak_current_ma: 6.0
+    duty_cycle: 1.0
+    bus_type: ADC
+    signals:
+      - {signal_name: AOUT, required_capability: ADC, direction: in}
+
+  BARE_RELAY_5V:
+    part_number: SRD-05VDC-SL-C-BARE
+    name: Bare 5V Electromechanical Relay Coil
+    category: actuator
+    supply_voltage: 5.0
+    logic_voltage: 3.3
+    idle_current_ma: 0.0
+    active_current_ma: 72.0
+    peak_current_ma: 95.0
+    duty_cycle: 0.45
+    bus_type: GPIO
+    inductive_load: true
+    has_driver_stage: false
+    has_flyback_diode: false
+    signals:
+      - {signal_name: COIL_DRIVE, required_capability: GPIO_OUT, direction: out}
+
+  MIST_RELAY_DRIVER:
+    part_number: SRD-05VDC-OPTOMOS
+    name: Opto-Isolated MOSFET Ultrasonic Mist Relay
+    category: actuator
+    supply_voltage: 5.0
+    logic_voltage: 3.3
+    idle_current_ma: 1.0
+    active_current_ma: 140.0
+    peak_current_ma: 210.0
+    duty_cycle: 0.40
+    bus_type: GPIO
+    inductive_load: true
+    has_driver_stage: true
+    has_flyback_diode: true
+    powered_from_mcu_regulator: false
+    bom_notes: Includes PC817 optocoupler + AO3400 N-MOSFET + 1N4007 flyback diode
+    signals:
+      - {signal_name: TRIG_IN, required_capability: GPIO_OUT, direction: out}
+
+  PWM_EXHAUST_FAN:
+    part_number: NF-A4x10-5V-PWM
+    name: 5V Brushless PWM Exhaust Fan
+    category: actuator
+    supply_voltage: 5.0
+    logic_voltage: 3.3
+    idle_current_ma: 8.0
+    active_current_ma: 110.0
+    peak_current_ma: 190.0
+    duty_cycle: 0.50
+    bus_type: PWM
+    inductive_load: true
+    has_driver_stage: true
+    has_flyback_diode: true
+    powered_from_mcu_regulator: false
+    bom_notes: Integrated hall-driver IC with 25kHz 3.3V/5V logic PWM input
+    signals:
+      - {signal_name: PWM_CTRL, required_capability: PWM, direction: out}
+
+  L298N:
+    part_number: L298N-DUAL-HBRIDGE
+    name: L298N Dual H-Bridge DC Motor Driver + Dual Gearmotors
+    category: driver
+    supply_voltage: 7.4
+    logic_voltage: 5.0
+    idle_current_ma: 24.0
+    active_current_ma: 380.0
+    peak_current_ma: 920.0
+    duty_cycle: 0.65
+    bus_type: MOTOR_DRIVER
+    inductive_load: true
+    has_driver_stage: true
+    has_flyback_diode: true
+    powered_from_mcu_regulator: false
+    bom_notes: Powered directly from 2S 7.4V battery pack; onboard clamp diodes
+    signals:
+      - {signal_name: ENA, required_capability: PWM, direction: out}
+      - {signal_name: ENB, required_capability: PWM, direction: out}
+      - {signal_name: IN1, required_capability: GPIO_OUT, direction: out}
+      - {signal_name: IN2, required_capability: GPIO_OUT, direction: out}
+      - {signal_name: IN3, required_capability: GPIO_OUT, direction: out}
+      - {signal_name: IN4, required_capability: GPIO_OUT, direction: out}
+
+  HC-SR04:
+    part_number: HC-SR04
+    name: Ultrasonic Ranging Sensor
+    category: sensor
+    supply_voltage: 5.0
+    logic_voltage: 5.0
+    idle_current_ma: 2.0
+    active_current_ma: 15.0
+    peak_current_ma: 20.0
+    duty_cycle: 0.40
+    bus_type: GPIO
+    signals:
+      - {signal_name: TRIG, required_capability: GPIO_OUT, direction: out}
+      - {signal_name: ECHO, required_capability: GPIO_IN, direction: in}
+
+  SG90:
+    part_number: SG90-9G-SERVO
+    name: TowerPro SG90 Pan Servo
+    category: actuator
+    supply_voltage: 5.0
+    logic_voltage: 5.0
+    idle_current_ma: 10.0
+    active_current_ma: 130.0
+    peak_current_ma: 320.0
+    duty_cycle: 0.30
+    bus_type: SERVO
+    inductive_load: true
+    has_driver_stage: true
+    has_flyback_diode: true
+    uses_timer1_isr: true
+    powered_from_mcu_regulator: false
+    bom_notes: Uses ATmega328P Timer1 ISR via Servo.h (disables PWM on D9/D10)
+    signals:
+      - {signal_name: SERVO_SIG, required_capability: SERVO, direction: out}
+
+  HC-05:
+    part_number: HC-05-BT-UART
+    name: HC-05 Bluetooth SPP Transceiver
+    category: comms
+    supply_voltage: 5.0
+    logic_voltage: 3.3
+    idle_current_ma: 8.0
+    active_current_ma: 32.0
+    peak_current_ma: 42.0
+    duty_cycle: 0.50
+    bus_type: UART
+    bom_notes: 5V breakout with 1k/2k divider on module RX
+    signals:
+      - {signal_name: MCU_RX_FROM_BT_TX, required_capability: UART_RX, direction: in}
+      - {signal_name: MCU_TX_TO_BT_RX, required_capability: UART_TX, direction: out}
+
+  INMP441:
+    part_number: INMP441-MEMS-I2S
+    name: INMP441 Omnidirectional I2S Digital Microphone
+    category: audio
+    supply_voltage: 3.3
+    logic_voltage: 3.3
+    idle_current_ma: 0.5
+    active_current_ma: 1.4
+    peak_current_ma: 2.0
+    duty_cycle: 1.0
+    bus_type: I2S_RX
+    signals:
+      - {signal_name: SCK, required_capability: I2S_SCK, direction: out}
+      - {signal_name: WS, required_capability: I2S_WS, direction: out}
+      - {signal_name: SD, required_capability: I2S_SD, direction: in}
+
+  MAX98357A:
+    part_number: MAX98357A-I2S-AMP
+    name: MAX98357A 3.2W Class-D I2S Audio Amplifier
+    category: audio
+    supply_voltage: 5.0
+    logic_voltage: 3.3
+    idle_current_ma: 2.8
+    active_current_ma: 195.0
+    peak_current_ma: 640.0
+    duty_cycle: 0.35
+    bus_type: I2S_TX
+    powered_from_mcu_regulator: false
+    bom_notes: Powered from 5V VBUS rail with 470uF bulk decoupling capacitor for audio bursts
+    signals:
+      - {signal_name: BCLK, required_capability: I2S_SCK, direction: out}
+      - {signal_name: LRC, required_capability: I2S_WS, direction: out}
+      - {signal_name: DIN, required_capability: I2S_SD, direction: out}
+
+  ILI9341_2_8_TFT:
+    part_number: ILI9341-2.8-SPI-TFT
+    name: 2.8-inch 240x320 ILI9341 High-Speed SPI TFT
+    category: display
+    supply_voltage: 3.3
+    logic_voltage: 3.3
+    idle_current_ma: 22.0
+    active_current_ma: 68.0
+    peak_current_ma: 95.0
+    duty_cycle: 0.90
+    bus_type: SPI
+    signals:
+      - {signal_name: MOSI, required_capability: SPI_MOSI, direction: out, shared_bus: SPI_DISP}
+      - {signal_name: MISO, required_capability: SPI_MISO, direction: in, shared_bus: SPI_DISP}
+      - {signal_name: SCK, required_capability: SPI_SCK, direction: out, shared_bus: SPI_DISP}
+      - {signal_name: CS, required_capability: SPI_CS, direction: out}
+      - {signal_name: DC, required_capability: GPIO_OUT, direction: out}
+      - {signal_name: RST, required_capability: GPIO_OUT, direction: out}
+      - {signal_name: LED_PWM, required_capability: PWM, direction: out}

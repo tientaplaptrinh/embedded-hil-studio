@@ -1,0 +1,212 @@
+board_id: esp32_devkit_v1
+name: ESP32 DevKit V1 (38-Pin WROOM-32)
+mcu: ESP32-D0WDQ6
+pio_board: esp32dev
+pio_platform: espressif32
+pio_framework: arduino
+logic_voltage: 3.3
+max_pin_current_safe_ma: 12.0
+max_pin_current_abs_ma: 40.0
+max_regulator_current_ma: 800.0
+base_idle_current_ma: 32.0
+base_active_current_ma: 85.0
+wifi_active_extra_ma: 95.0
+wifi_peak_extra_ma: 240.0
+supports_wifi: true
+flexible_pin_matrix: true
+pins:
+  - pin_id: GPIO0
+    gpio_num: 0
+    label: GPIO0 (BOOT / ADC2_CH1)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, I2C_SDA, I2C_SCL]
+    strapping: true
+    strapping_note: Must be HIGH for normal SPI flash boot; LOW enters ROM bootloader.
+    adc_unit: ADC2
+  - pin_id: GPIO1
+    gpio_num: 1
+    label: GPIO1 (U0TXD)
+    capabilities: [GPIO_IN, GPIO_OUT, UART_TX]
+    hardware_uart: true
+  - pin_id: GPIO2
+    gpio_num: 2
+    label: GPIO2 (ONBOARD_LED / ADC2_CH2)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM]
+    strapping: true
+    strapping_note: Must be LOW or floating during flashing.
+    adc_unit: ADC2
+  - pin_id: GPIO3
+    gpio_num: 3
+    label: GPIO3 (U0RXD)
+    capabilities: [GPIO_IN, GPIO_OUT, UART_RX]
+    hardware_uart: true
+  - pin_id: GPIO4
+    gpio_num: 4
+    label: GPIO4 (ADC2_CH0)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, I2C_SDA, I2C_SCL, SPI_CS, I2S_SCK, I2S_WS, I2S_SD]
+    adc_unit: ADC2
+  - pin_id: GPIO5
+    gpio_num: 5
+    label: GPIO5 (VSPI_CS0 / STRAP)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM, SPI_CS]
+    strapping: true
+    strapping_note: Controls SDIO slave timing at boot (prefer pull-up).
+  - pin_id: GPIO6
+    gpio_num: 6
+    label: GPIO6 (FLASH_SCK)
+    capabilities: []
+    forbidden: true
+    forbidden_reason: Connected internally to SPI NOR Flash SCK.
+  - pin_id: GPIO7
+    gpio_num: 7
+    label: GPIO7 (FLASH_SD0)
+    capabilities: []
+    forbidden: true
+    forbidden_reason: Connected internally to SPI NOR Flash SD0.
+  - pin_id: GPIO8
+    gpio_num: 8
+    label: GPIO8 (FLASH_SD1)
+    capabilities: []
+    forbidden: true
+    forbidden_reason: Connected internally to SPI NOR Flash SD1.
+  - pin_id: GPIO9
+    gpio_num: 9
+    label: GPIO9 (FLASH_SD2)
+    capabilities: []
+    forbidden: true
+    forbidden_reason: Connected internally to SPI NOR Flash SD2.
+  - pin_id: GPIO10
+    gpio_num: 10
+    label: GPIO10 (FLASH_SD3)
+    capabilities: []
+    forbidden: true
+    forbidden_reason: Connected internally to SPI NOR Flash SD3.
+  - pin_id: GPIO11
+    gpio_num: 11
+    label: GPIO11 (FLASH_CMD)
+    capabilities: []
+    forbidden: true
+    forbidden_reason: Connected internally to SPI NOR Flash CMD.
+  - pin_id: GPIO12
+    gpio_num: 12
+    label: GPIO12 (MTDI / ADC2_CH5)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM]
+    strapping: true
+    strapping_note: Selects VDD_SDIO flash voltage (HIGH forces 1.8V and bricks 3.3V flash boot!).
+    adc_unit: ADC2
+  - pin_id: GPIO13
+    gpio_num: 13
+    label: GPIO13 (HSPI_MOSI / ADC2_CH4)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, SPI_MOSI, SPI_CS, I2S_SCK, I2S_WS, I2S_SD]
+    adc_unit: ADC2
+  - pin_id: GPIO14
+    gpio_num: 14
+    label: GPIO14 (HSPI_SCK / ADC2_CH6)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, SPI_SCK, SPI_CS, I2S_SCK, I2S_WS, I2S_SD]
+    adc_unit: ADC2
+  - pin_id: GPIO15
+    gpio_num: 15
+    label: GPIO15 (MTDO / ADC2_CH3)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM]
+    strapping: true
+    strapping_note: Silences UART0 ROM boot messages if pulled LOW.
+    adc_unit: ADC2
+  - pin_id: GPIO16
+    gpio_num: 16
+    label: GPIO16 (U2RXD)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM, UART_RX, SPI_CS, I2S_SCK, I2S_WS, I2S_SD]
+  - pin_id: GPIO17
+    gpio_num: 17
+    label: GPIO17 (U2TXD)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM, UART_TX, SPI_CS, I2S_SCK, I2S_WS, I2S_SD]
+  - pin_id: GPIO18
+    gpio_num: 18
+    label: GPIO18 (VSPI_SCK)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM, SPI_SCK, SPI_CS, I2S_SCK, I2S_WS, I2S_SD]
+    bus_roles: {SPI0: SCK}
+  - pin_id: GPIO19
+    gpio_num: 19
+    label: GPIO19 (VSPI_MISO)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM, SPI_MISO, SPI_CS, I2S_SCK, I2S_WS, I2S_SD]
+    bus_roles: {SPI0: MISO}
+  - pin_id: GPIO21
+    gpio_num: 21
+    label: GPIO21 (I2C_SDA)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM, I2C_SDA, SPI_CS, I2S_SCK, I2S_WS, I2S_SD]
+    bus_roles: {I2C0: SDA}
+  - pin_id: GPIO22
+    gpio_num: 22
+    label: GPIO22 (I2C_SCL)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM, I2C_SCL, SPI_CS, I2S_SCK, I2S_WS, I2S_SD]
+    bus_roles: {I2C0: SCL}
+  - pin_id: GPIO23
+    gpio_num: 23
+    label: GPIO23 (VSPI_MOSI)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM, SPI_MOSI, SPI_CS, I2S_SCK, I2S_WS, I2S_SD]
+    bus_roles: {SPI0: MOSI}
+  - pin_id: GPIO25
+    gpio_num: 25
+    label: GPIO25 (DAC1 / ADC2_CH8)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, SPI_CS, I2S_SCK, I2S_WS, I2S_SD]
+    adc_unit: ADC2
+  - pin_id: GPIO26
+    gpio_num: 26
+    label: GPIO26 (DAC2 / ADC2_CH9)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, SPI_CS, I2S_SCK, I2S_WS, I2S_SD]
+    adc_unit: ADC2
+  - pin_id: GPIO27
+    gpio_num: 27
+    label: GPIO27 (ADC2_CH7)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, SPI_CS, I2S_SCK, I2S_WS, I2S_SD]
+    adc_unit: ADC2
+  - pin_id: GPIO32
+    gpio_num: 32
+    label: GPIO32 (ADC1_CH4)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, SPI_CS, I2S_SCK, I2S_WS, I2S_SD]
+    adc_unit: ADC1
+  - pin_id: GPIO33
+    gpio_num: 33
+    label: GPIO33 (ADC1_CH5)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, SPI_CS, I2S_SCK, I2S_WS, I2S_SD]
+    adc_unit: ADC1
+  - pin_id: GPIO34
+    gpio_num: 34
+    label: GPIO34 (ADC1_CH6 / IN_ONLY)
+    capabilities: [GPIO_IN, ADC, I2S_SD]
+    input_only: true
+    internal_pullup: false
+    adc_unit: ADC1
+  - pin_id: GPIO35
+    gpio_num: 35
+    label: GPIO35 (ADC1_CH7 / IN_ONLY)
+    capabilities: [GPIO_IN, ADC, I2S_SD]
+    input_only: true
+    internal_pullup: false
+    adc_unit: ADC1
+  - pin_id: GPIO36
+    gpio_num: 36
+    label: GPIO36 (VP / ADC1_CH0 / IN_ONLY)
+    capabilities: [GPIO_IN, ADC]
+    input_only: true
+    internal_pullup: false
+    adc_unit: ADC1
+  - pin_id: GPIO37
+    gpio_num: 37
+    label: GPIO37 (ADC1_CH1 / IN_ONLY)
+    capabilities: [GPIO_IN, ADC]
+    input_only: true
+    internal_pullup: false
+    adc_unit: ADC1
+  - pin_id: GPIO38
+    gpio_num: 38
+    label: GPIO38 (ADC1_CH2 / IN_ONLY)
+    capabilities: [GPIO_IN, ADC]
+    input_only: true
+    internal_pullup: false
+    adc_unit: ADC1
+  - pin_id: GPIO39
+    gpio_num: 39
+    label: GPIO39 (VN / ADC1_CH3 / IN_ONLY)
+    capabilities: [GPIO_IN, ADC]
+    input_only: true
+    internal_pullup: false
+    adc_unit: ADC1

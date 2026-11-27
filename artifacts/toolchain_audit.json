@@ -1,0 +1,46 @@
+{
+  "timestamp_utc": "2026-11-27T04:13:19.837293+00:00",
+  "os": "Windows-11-10.0.22000-SP0",
+  "python_venv": {
+    "installed": true,
+    "path": "C:\\Users\\DELL INSPIRON 5515\\.gemini\\antigravity\\scratch\\embedded_hil_studio\\.venv\\Scripts\\python.exe",
+    "version": "3.12.10"
+  },
+  "tools": {
+    "python3": {
+      "installed": true,
+      "path": "C:\\Users\\DELL INSPIRON 5515\\.gemini\\antigravity\\scratch\\embedded_hil_studio\\.venv\\Scripts\\python.exe",
+      "version": "Python 3.12.10",
+      "returncode": 0
+    },
+    "node": {
+      "installed": true,
+      "path": "C:\\Program Files\\nodejs\\node.EXE",
+      "version": "v26.13.0",
+      "returncode": 0
+    },
+    "npm": {
+      "installed": true,
+      "path": "C:\\Program Files\\nodejs\\npm.cmd",
+      "version": "11.20.0",
+      "returncode": 0
+    },
+    "g++": {
+      "installed": true,
+      "path": "C:\\mingw64\\bin\\g++.EXE",
+      "version": "g++.EXE (Rev2, Built by MSYS2 project) 12.1.0",
+      "returncode": 0
+    },
+    "clang++": {
+      "installed": false,
+      "path": null,
+      "version": null
+    },
+    "pio": {
+      "installed": true,
+      "path": "C:\\Users\\DELL INSPIRON 5515\\.gemini\\antigravity\\scratch\\embedded_hil_studio\\.venv\\Scripts\\pio.exe",
+      "version": "PlatformIO Core, version 6.2.0",
+      "returncode": 0
+    }
+  }
+}

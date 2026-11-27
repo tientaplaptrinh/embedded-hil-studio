@@ -1,0 +1,261 @@
+board_id: esp32_s3_devkitc
+name: ESP32-S3 DevKitC-1 (N8R8 Octal PSRAM)
+mcu: ESP32-S3-WROOM-1-N8R8
+pio_board: esp32-s3-devkitc-1
+pio_platform: espressif32
+pio_framework: arduino
+logic_voltage: 3.3
+max_pin_current_safe_ma: 12.0
+max_pin_current_abs_ma: 40.0
+max_regulator_current_ma: 800.0
+base_idle_current_ma: 28.0
+base_active_current_ma: 92.0
+wifi_active_extra_ma: 95.0
+wifi_peak_extra_ma: 235.0
+supports_wifi: true
+flexible_pin_matrix: true
+pins:
+  - pin_id: GPIO0
+    gpio_num: 0
+    label: GPIO0 (BOOT STRAP)
+    capabilities: [GPIO_IN, GPIO_OUT]
+    strapping: true
+    strapping_note: Boot mode strapping pin (LOW enters download mode).
+  - pin_id: GPIO1
+    gpio_num: 1
+    label: GPIO1 (ADC1_CH0)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, I2C_SDA, I2C_SCL, SPI_CS]
+    adc_unit: ADC1
+  - pin_id: GPIO2
+    gpio_num: 2
+    label: GPIO2 (ADC1_CH1)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, I2C_SDA, I2C_SCL, SPI_CS]
+    adc_unit: ADC1
+  - pin_id: GPIO3
+    gpio_num: 3
+    label: GPIO3 (JTAG STRAP / ADC1_CH2)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM]
+    strapping: true
+    strapping_note: Controls JTAG signal source strapping at reset.
+    adc_unit: ADC1
+  - pin_id: GPIO4
+    gpio_num: 4
+    label: GPIO4 (ADC1_CH3 / I2S0_SCK)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, I2S_SCK, SPI_CS]
+    adc_unit: ADC1
+  - pin_id: GPIO5
+    gpio_num: 5
+    label: GPIO5 (ADC1_CH4 / I2S0_WS)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, I2S_WS, SPI_CS]
+    adc_unit: ADC1
+  - pin_id: GPIO6
+    gpio_num: 6
+    label: GPIO6 (ADC1_CH5 / I2S0_SD)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, I2S_SD, SPI_CS]
+    adc_unit: ADC1
+  - pin_id: GPIO7
+    gpio_num: 7
+    label: GPIO7 (ADC1_CH6 / I2S1_SCK)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, I2S_SCK, SPI_CS]
+    adc_unit: ADC1
+  - pin_id: GPIO8
+    gpio_num: 8
+    label: GPIO8 (ADC1_CH7 / I2C_SDA / I2S1_WS)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, I2C_SDA, I2S_WS, SPI_CS]
+    adc_unit: ADC1
+    bus_roles: {I2C0: SDA}
+  - pin_id: GPIO9
+    gpio_num: 9
+    label: GPIO9 (ADC1_CH8 / I2C_SCL / I2S1_SD)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, I2C_SCL, I2S_SD, SPI_CS]
+    adc_unit: ADC1
+    bus_roles: {I2C0: SCL}
+  - pin_id: GPIO10
+    gpio_num: 10
+    label: GPIO10 (SPI2_CS / ADC1_CH9)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, SPI_CS]
+    adc_unit: ADC1
+    bus_roles: {SPI2: CS}
+  - pin_id: GPIO11
+    gpio_num: 11
+    label: GPIO11 (SPI2_MOSI / ADC2_CH0)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, SPI_MOSI]
+    adc_unit: ADC2
+    bus_roles: {SPI2: MOSI}
+  - pin_id: GPIO12
+    gpio_num: 12
+    label: GPIO12 (SPI2_SCK / ADC2_CH1)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, SPI_SCK]
+    adc_unit: ADC2
+    bus_roles: {SPI2: SCK}
+  - pin_id: GPIO13
+    gpio_num: 13
+    label: GPIO13 (SPI2_MISO / ADC2_CH2)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, SPI_MISO]
+    adc_unit: ADC2
+    bus_roles: {SPI2: MISO}
+  - pin_id: GPIO14
+    gpio_num: 14
+    label: GPIO14 (ADC2_CH3)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, SPI_CS]
+    adc_unit: ADC2
+  - pin_id: GPIO15
+    gpio_num: 15
+    label: GPIO15 (ADC2_CH4 / I2S_SCK)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, I2S_SCK, UART_RTS]
+    adc_unit: ADC2
+  - pin_id: GPIO16
+    gpio_num: 16
+    label: GPIO16 (ADC2_CH5 / I2S_WS)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, I2S_WS, UART_CTS]
+    adc_unit: ADC2
+  - pin_id: GPIO17
+    gpio_num: 17
+    label: GPIO17 (U1TXD / ADC2_CH6 / I2S_SD)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, UART_TX, I2S_SD]
+    adc_unit: ADC2
+  - pin_id: GPIO18
+    gpio_num: 18
+    label: GPIO18 (U1RXD / ADC2_CH7)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, PWM, UART_RX, SPI_CS]
+    adc_unit: ADC2
+  - pin_id: GPIO19
+    gpio_num: 19
+    label: GPIO19 (USB_D- / JTAG)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC]
+    reserved_when: [usb_jtag]
+    adc_unit: ADC2
+  - pin_id: GPIO20
+    gpio_num: 20
+    label: GPIO20 (USB_D+ / JTAG)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC]
+    reserved_when: [usb_jtag]
+    adc_unit: ADC2
+  - pin_id: GPIO21
+    gpio_num: 21
+    label: GPIO21 (GEN_IO)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM, I2C_SDA, I2C_SCL, SPI_CS]
+  - pin_id: GPIO26
+    gpio_num: 26
+    label: GPIO26 (FLASH_CS)
+    capabilities: []
+    forbidden: true
+    forbidden_reason: Reserved for internal SPI/Octal Flash CS.
+    reserved_when: [opi_psram]
+  - pin_id: GPIO27
+    gpio_num: 27
+    label: GPIO27 (FLASH_HD)
+    capabilities: []
+    forbidden: true
+    forbidden_reason: Reserved for internal SPI/Octal Flash.
+    reserved_when: [opi_psram]
+  - pin_id: GPIO28
+    gpio_num: 28
+    label: GPIO28 (FLASH_WP)
+    capabilities: []
+    forbidden: true
+    forbidden_reason: Reserved for internal SPI/Octal Flash.
+    reserved_when: [opi_psram]
+  - pin_id: GPIO29
+    gpio_num: 29
+    label: GPIO29 (FLASH_SPICS0)
+    capabilities: []
+    forbidden: true
+    forbidden_reason: Reserved for internal SPI/Octal Flash.
+    reserved_when: [opi_psram]
+  - pin_id: GPIO30
+    gpio_num: 30
+    label: GPIO30 (FLASH_SPICLK)
+    capabilities: []
+    forbidden: true
+    forbidden_reason: Reserved for internal SPI/Octal Flash.
+    reserved_when: [opi_psram]
+  - pin_id: GPIO31
+    gpio_num: 31
+    label: GPIO31 (FLASH_SPIQ)
+    capabilities: []
+    forbidden: true
+    forbidden_reason: Reserved for internal SPI/Octal Flash.
+    reserved_when: [opi_psram]
+  - pin_id: GPIO32
+    gpio_num: 32
+    label: GPIO32 (FLASH_SPID)
+    capabilities: []
+    forbidden: true
+    forbidden_reason: Reserved for internal SPI/Octal Flash.
+    reserved_when: [opi_psram]
+  - pin_id: GPIO33
+    gpio_num: 33
+    label: GPIO33 (SPIIO4 / OPI_PSRAM)
+    capabilities: [GPIO_IN, GPIO_OUT]
+    reserved_when: [opi_psram]
+  - pin_id: GPIO34
+    gpio_num: 34
+    label: GPIO34 (SPIIO5 / OPI_PSRAM)
+    capabilities: [GPIO_IN, GPIO_OUT]
+    reserved_when: [opi_psram]
+  - pin_id: GPIO35
+    gpio_num: 35
+    label: GPIO35 (SPIIO6 / OPI_PSRAM)
+    capabilities: [GPIO_IN, GPIO_OUT]
+    reserved_when: [opi_psram]
+  - pin_id: GPIO36
+    gpio_num: 36
+    label: GPIO36 (SPIIO7 / OPI_PSRAM)
+    capabilities: [GPIO_IN, GPIO_OUT]
+    reserved_when: [opi_psram]
+  - pin_id: GPIO37
+    gpio_num: 37
+    label: GPIO37 (SPIDQS / OPI_PSRAM)
+    capabilities: [GPIO_IN, GPIO_OUT]
+    reserved_when: [opi_psram]
+  - pin_id: GPIO38
+    gpio_num: 38
+    label: GPIO38 (SPI3_FSPIWP / GEN_IO)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM, SPI_CS, I2S_SCK, I2S_WS, I2S_SD]
+  - pin_id: GPIO39
+    gpio_num: 39
+    label: GPIO39 (MTCK / SPI3_CLK)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM, SPI_SCK, I2S_SCK]
+  - pin_id: GPIO40
+    gpio_num: 40
+    label: GPIO40 (MTDO / SPI3_MOSI)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM, SPI_MOSI, I2S_WS]
+  - pin_id: GPIO41
+    gpio_num: 41
+    label: GPIO41 (MTDI / SPI3_MISO)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM, SPI_MISO, I2S_SD]
+  - pin_id: GPIO42
+    gpio_num: 42
+    label: GPIO42 (MTMS / SPI3_CS)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM, SPI_CS, I2S_SD]
+  - pin_id: GPIO43
+    gpio_num: 43
+    label: GPIO43 (U0TXD)
+    capabilities: [GPIO_IN, GPIO_OUT, UART_TX]
+    hardware_uart: true
+  - pin_id: GPIO44
+    gpio_num: 44
+    label: GPIO44 (U0RXD)
+    capabilities: [GPIO_IN, GPIO_OUT, UART_RX]
+    hardware_uart: true
+  - pin_id: GPIO45
+    gpio_num: 45
+    label: GPIO45 (VDD_SPI STRAP)
+    capabilities: [GPIO_IN, GPIO_OUT]
+    strapping: true
+    strapping_note: Selects VDD_SPI flash/PSRAM voltage (do not pull HIGH on 3.3V OPI modules).
+  - pin_id: GPIO46
+    gpio_num: 46
+    label: GPIO46 (ROM_LOG STRAP)
+    capabilities: [GPIO_IN, GPIO_OUT]
+    strapping: true
+    strapping_note: Boot mode & ROM print strapping pin.
+  - pin_id: GPIO47
+    gpio_num: 47
+    label: GPIO47 (SPICLK_P / GEN_IO)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM, SPI_CS]
+  - pin_id: GPIO48
+    gpio_num: 48
+    label: GPIO48 (RGB_LED / GEN_IO)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM]

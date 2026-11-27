@@ -1,0 +1,288 @@
+benchmarks:
+  - project_id: benchmark_1_microclimate
+    name: Automated Micro-Climate Habitat Controller
+    description: >
+      ESP32 Wi-Fi closed-loop terrarium/habitat controller with SHT31-D I2C hygrometer,
+      substrate ADC probe, ultrasonic mist relay, and PWM exhaust fan. Includes deliberate
+      initial DRC errors (ADC2 with Wi-Fi ON, bare inductive relay coil on input-only GPIO34)
+      to verify DRC detection and automated pin/driver synthesis.
+    board_id: esp32_devkit_v1
+    wifi_enabled: true
+    opi_psram_enabled: false
+    usb_jtag_reserved: false
+    battery:
+      name: 2S 18650 Li-Ion UPS Pack
+      nominal_voltage: 7.4
+      capacity_mah: 2600.0
+      max_continuous_discharge_ma: 4000.0
+      regulator_efficiency: 0.88
+      usable_dod: 0.85
+    control:
+      archetype: microclimate_pid
+      loop_hz: 20
+      setpoint: 75.0
+      kp: 2.5
+      ki: 0.60
+      kd: 0.18
+      max_continuous_on_ms: 45000
+      sensor_timeout_ms: 350
+      obstacle_stop_cm: 28.0
+    peripherals:
+      - instance_id: sht31_sensor
+        part_number: SHT31-D
+        name: Sensirion SHT31-D I2C Temp/RH Sensor
+        category: sensor
+        supply_voltage: 3.3
+        logic_voltage: 3.3
+        idle_current_ma: 0.2
+        active_current_ma: 1.2
+        peak_current_ma: 1.8
+        duty_cycle: 0.25
+        bus_type: I2C
+        i2c_address: "0x44"
+        signals:
+          - {signal_name: SDA, required_capability: I2C_SDA, direction: inout, shared_bus: I2C0}
+          - {signal_name: SCL, required_capability: I2C_SCL, direction: out, shared_bus: I2C0}
+
+      - instance_id: substrate_adc
+        part_number: CAPACITIVE_MOISTURE_V1_2
+        name: Backup Capacitive Humidity Probe
+        category: sensor
+        supply_voltage: 3.3
+        logic_voltage: 3.3
+        idle_current_ma: 4.5
+        active_current_ma: 5.0
+        peak_current_ma: 6.0
+        duty_cycle: 1.0
+        bus_type: ADC
+        manual_pins:
+          AOUT: GPIO25
+        signals:
+          - {signal_name: AOUT, required_capability: ADC, direction: in}
+
+      - instance_id: mist_relay
+        part_number: SRD-05VDC-SL-C
+        name: Ultrasonic Mist Atomizer Relay
+        category: actuator
+        supply_voltage: 5.0
+        logic_voltage: 3.3
+        idle_current_ma: 1.0
+        active_current_ma: 135.0
+        peak_current_ma: 195.0
+        duty_cycle: 0.40
+        bus_type: GPIO
+        inductive_load: true
+        has_driver_stage: false
+        has_flyback_diode: false
+        manual_pins:
+          COIL_DRIVE: GPIO34
+        signals:
+          - {signal_name: COIL_DRIVE, required_capability: GPIO_OUT, direction: out}
+
+      - instance_id: exhaust_fan
+        part_number: NF-A4x10-5V-PWM
+        name: 5V Brushless PWM Exhaust Fan
+        category: actuator
+        supply_voltage: 5.0
+        logic_voltage: 3.3
+        idle_current_ma: 8.0
+        active_current_ma: 110.0
+        peak_current_ma: 190.0
+        duty_cycle: 0.35
+        bus_type: PWM
+        inductive_load: true
+        has_driver_stage: true
+        has_flyback_diode: true
+        powered_from_mcu_regulator: false
+        bom_notes: Built-in hall driver + flyback protection on 5V rail
+        signals:
+          - {signal_name: PWM_CTRL, required_capability: PWM, direction: out}
+
+  - project_id: benchmark_2_rover
+    name: Dual-Mode Ultrasonic Obstacle-Avoiding Rover
+    description: >
+      Arduino Uno (ATmega328P) differential-drive rover with L298N H-bridge, HC-SR04
+      ultrasonic rangefinder, SG90 pan servo, HC-05 Bluetooth SPP telemetry/control,
+      and 2S 18650 2000mAh Li-Ion battery pack. Tests Timer1 Servo vs D9/D10 PWM conflict
+      detection & avoidance and D0/D1 UART sharing warning.
+    board_id: arduino_uno
+    wifi_enabled: false
+    opi_psram_enabled: false
+    usb_jtag_reserved: false
+    battery:
+      name: 2S 18650 2000mAh Li-Ion Pack
+      nominal_voltage: 7.4
+      capacity_mah: 2000.0
+      max_continuous_discharge_ma: 4000.0
+      regulator_efficiency: 0.85
+      usable_dod: 0.85
+    control:
+      archetype: rover_obstacle_fsm
+      loop_hz: 20
+      setpoint: 68.0
+      kp: 1.5
+      ki: 0.0
+      kd: 0.05
+      max_continuous_on_ms: 60000
+      sensor_timeout_ms: 400
+      obstacle_stop_cm: 30.0
+    peripherals:
+      - instance_id: l298n_drive
+        part_number: L298N-DUAL-HBRIDGE
+        name: L298N Dual H-Bridge + TT Gearmotors
+        category: driver
+        supply_voltage: 7.4
+        logic_voltage: 5.0
+        idle_current_ma: 24.0
+        active_current_ma: 380.0
+        peak_current_ma: 920.0
+        duty_cycle: 0.65
+        bus_type: MOTOR_DRIVER
+        inductive_load: true
+        has_driver_stage: true
+        has_flyback_diode: true
+        powered_from_mcu_regulator: false
+        manual_pins:
+          ENA: D9
+          ENB: D10
+        bom_notes: Powered from 2S 7.4V battery rail; onboard fast clamp diodes
+        signals:
+          - {signal_name: ENA, required_capability: PWM, direction: out}
+          - {signal_name: ENB, required_capability: PWM, direction: out}
+          - {signal_name: IN1, required_capability: GPIO_OUT, direction: out}
+          - {signal_name: IN2, required_capability: GPIO_OUT, direction: out}
+          - {signal_name: IN3, required_capability: GPIO_OUT, direction: out}
+          - {signal_name: IN4, required_capability: GPIO_OUT, direction: out}
+
+      - instance_id: ultrasonic_front
+        part_number: HC-SR04
+        name: HC-SR04 Ultrasonic Distance Sensor
+        category: sensor
+        supply_voltage: 5.0
+        logic_voltage: 5.0
+        idle_current_ma: 2.0
+        active_current_ma: 15.0
+        peak_current_ma: 20.0
+        duty_cycle: 0.40
+        bus_type: GPIO
+        signals:
+          - {signal_name: TRIG, required_capability: GPIO_OUT, direction: out}
+          - {signal_name: ECHO, required_capability: GPIO_IN, direction: in}
+
+      - instance_id: pan_servo
+        part_number: SG90-9G-SERVO
+        name: SG90 Ultrasonic Scan Servo
+        category: actuator
+        supply_voltage: 5.0
+        logic_voltage: 5.0
+        idle_current_ma: 10.0
+        active_current_ma: 130.0
+        peak_current_ma: 320.0
+        duty_cycle: 0.30
+        bus_type: SERVO
+        inductive_load: true
+        has_driver_stage: true
+        has_flyback_diode: true
+        uses_timer1_isr: true
+        powered_from_mcu_regulator: false
+        bom_notes: Driven via external 5V BEC rail; claims ATmega328P Timer1 ISR
+        signals:
+          - {signal_name: SERVO_SIG, required_capability: SERVO, direction: out}
+
+      - instance_id: bt_hc05
+        part_number: HC-05-BT-UART
+        name: HC-05 Bluetooth SPP Module
+        category: comms
+        supply_voltage: 5.0
+        logic_voltage: 3.3
+        idle_current_ma: 8.0
+        active_current_ma: 32.0
+        peak_current_ma: 42.0
+        duty_cycle: 0.50
+        bus_type: UART
+        bom_notes: 1k/2k divider on BT RX; disconnect TX jumper during Uno USB upload
+        signals:
+          - {signal_name: MCU_RX_FROM_BT_TX, required_capability: UART_RX, direction: in}
+          - {signal_name: MCU_TX_TO_BT_RX, required_capability: UART_TX, direction: out}
+
+  - project_id: benchmark_3_voice_display
+    name: Edge Voice & Display Node
+    description: >
+      ESP32-S3 (Octal PSRAM N8R8) voice assistant & graphical UI node combining INMP441
+      I2S RX microphone, MAX98357A Class-D I2S TX speaker amplifier, and 2.8" ILI9341
+      high-speed SPI TFT display while avoiding GPIO 26-37 OPI PSRAM/Flash and strapping pins.
+    board_id: esp32_s3_devkitc
+    wifi_enabled: true
+    opi_psram_enabled: true
+    usb_jtag_reserved: true
+    battery:
+      name: 1S2P LiPo 3000mAh + 5V Boost UPS
+      nominal_voltage: 5.0
+      capacity_mah: 3000.0
+      max_continuous_discharge_ma: 2500.0
+      regulator_efficiency: 0.90
+      usable_dod: 0.85
+    control:
+      archetype: edge_voice_display
+      loop_hz: 25
+      setpoint: 65.0
+      kp: 1.8
+      ki: 0.2
+      kd: 0.05
+      max_continuous_on_ms: 60000
+      sensor_timeout_ms: 400
+      obstacle_stop_cm: 28.0
+    peripherals:
+      - instance_id: inmp441_mic
+        part_number: INMP441-MEMS-I2S
+        name: INMP441 Omnidirectional I2S Microphone
+        category: audio
+        supply_voltage: 3.3
+        logic_voltage: 3.3
+        idle_current_ma: 0.5
+        active_current_ma: 1.4
+        peak_current_ma: 2.0
+        duty_cycle: 1.0
+        bus_type: I2S_RX
+        signals:
+          - {signal_name: SCK, required_capability: I2S_SCK, direction: out}
+          - {signal_name: WS, required_capability: I2S_WS, direction: out}
+          - {signal_name: SD, required_capability: I2S_SD, direction: in}
+
+      - instance_id: max98357a_amp
+        part_number: MAX98357A-I2S-AMP
+        name: MAX98357A 3.2W Class-D I2S Audio Amplifier
+        category: audio
+        supply_voltage: 5.0
+        logic_voltage: 3.3
+        idle_current_ma: 2.8
+        active_current_ma: 195.0
+        peak_current_ma: 640.0
+        duty_cycle: 0.35
+        bus_type: I2S_TX
+        powered_from_mcu_regulator: false
+        bom_notes: Powered from 5V VBUS rail with 470uF low-ESR bulk capacitor for audio bursts
+        signals:
+          - {signal_name: BCLK, required_capability: I2S_SCK, direction: out}
+          - {signal_name: LRC, required_capability: I2S_WS, direction: out}
+          - {signal_name: DIN, required_capability: I2S_SD, direction: out}
+
+      - instance_id: ili9341_tft
+        part_number: ILI9341-2.8-SPI-TFT
+        name: 2.8-inch 240x320 ILI9341 SPI TFT Display
+        category: display
+        supply_voltage: 3.3
+        logic_voltage: 3.3
+        idle_current_ma: 22.0
+        active_current_ma: 68.0
+        peak_current_ma: 95.0
+        duty_cycle: 0.90
+        bus_type: SPI
+        signals:
+          - {signal_name: MOSI, required_capability: SPI_MOSI, direction: out, shared_bus: SPI_DISP}
+          - {signal_name: MISO, required_capability: SPI_MISO, direction: in, shared_bus: SPI_DISP}
+          - {signal_name: SCK, required_capability: SPI_SCK, direction: out, shared_bus: SPI_DISP}
+          - {signal_name: CS, required_capability: SPI_CS, direction: out}
+          - {signal_name: DC, required_capability: GPIO_OUT, direction: out}
+          - {signal_name: RST, required_capability: GPIO_OUT, direction: out}
+          - {signal_name: LED_PWM, required_capability: PWM, direction: out}

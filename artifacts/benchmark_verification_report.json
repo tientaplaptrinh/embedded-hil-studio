@@ -1,0 +1,380 @@
+[
+  {
+    "project_id": "benchmark_1_microclimate",
+    "name": "Automated Micro-Climate Habitat Controller",
+    "board": "ESP32 DevKit V1 (38-Pin WROOM-32)",
+    "initial_drc": {
+      "passed": false,
+      "error_count": 3,
+      "warning_count": 0,
+      "violations": [
+        {
+          "severity": "error",
+          "rule_id": "DRC_ADC2_WIFI_CONFLICT",
+          "peripheral_id": "substrate_adc",
+          "pin_id": "GPIO25",
+          "message": "Analog input 'AOUT' on 'substrate_adc' uses GPIO25 (ADC2) while Wi-Fi is enabled; ESP32 Wi-Fi driver locks the SAR ADC2 controller.",
+          "recommendation": "Move analog sensor to an ADC1 pin (GPIO 32-39 on ESP32, GPIO 1-10 on ESP32-S3)."
+        },
+        {
+          "severity": "error",
+          "rule_id": "DRC_INPUT_ONLY_GPIO_OUTPUT",
+          "peripheral_id": "mist_relay",
+          "pin_id": "GPIO34",
+          "message": "Output/bidirectional signal 'COIL_DRIVE' of 'mist_relay' is wired to input-only pin GPIO34 (no output driver or internal pull-up).",
+          "recommendation": "Reassign output signal to an output-capable GPIO (e.g., GPIO 16-27, 32-33)."
+        },
+        {
+          "severity": "error",
+          "rule_id": "DRC_INDUCTIVE_NO_DRIVER",
+          "peripheral_id": "mist_relay",
+          "pin_id": null,
+          "message": "Inductive load 'mist_relay' (195 mA peak vs 12 mA safe GPIO limit) lacks transistor/MOSFET/optocoupler driver stage and flyback clamp diode.",
+          "recommendation": "Drive coil/motor via N-MOSFET (AO3400), opto-isolated relay driver, or H-Bridge with anti-parallel 1N4007/SS14 flyback diode."
+        }
+      ]
+    },
+    "final_drc": {
+      "passed": true,
+      "error_count": 0,
+      "warning_count": 0,
+      "violations": []
+    },
+    "auto_repaired": true,
+    "repair_notes": [
+      "Cleared conflicting manual pin overrides on 'substrate_adc' ({'AOUT': 'GPIO25'}).",
+      "Cleared conflicting manual pin overrides on 'mist_relay' ({'COIL_DRIVE': 'GPIO34'}).",
+      "Inserted opto-isolated N-MOSFET driver + 1N4007 flyback diode for inductive load 'mist_relay'."
+    ],
+    "power_budget": {
+      "idle_current_ma": 45.7,
+      "average_current_ma": 283.75,
+      "peak_current_ma": 717.8,
+      "mcu_regulator_current_ma": 332.8,
+      "mcu_regulator_limit_ma": 800.0,
+      "system_voltage_v": 7.4,
+      "idle_power_w": 0.166,
+      "average_power_w": 1.103,
+      "peak_power_w": 3.023,
+      "battery_name": "2S 18650 Li-Ion UPS Pack",
+      "battery_capacity_mah": 2600.0,
+      "estimated_runtime_hours": 13.04,
+      "breakdown": {
+        "esp32_devkit_v1": {
+          "voltage_v": 3.3,
+          "idle_ma": 32.0,
+          "avg_ma": 180.0,
+          "peak_ma": 325.0
+        },
+        "sht31_sensor": {
+          "voltage_v": 3.3,
+          "idle_ma": 0.2,
+          "avg_ma": 0.45,
+          "peak_ma": 1.8
+        },
+        "substrate_adc": {
+          "voltage_v": 3.3,
+          "idle_ma": 4.5,
+          "avg_ma": 5.0,
+          "peak_ma": 6.0
+        },
+        "mist_relay": {
+          "voltage_v": 5.0,
+          "idle_ma": 1.0,
+          "avg_ma": 54.6,
+          "peak_ma": 195.0
+        },
+        "exhaust_fan": {
+          "voltage_v": 5.0,
+          "idle_ma": 8.0,
+          "avg_ma": 43.7,
+          "peak_ma": 190.0
+        }
+      }
+    },
+    "svg_path": "C:\\Users\\DELL INSPIRON 5515\\.gemini\\antigravity\\scratch\\embedded_hil_studio\\artifacts\\wiring\\benchmark_1_microclimate_wiring.svg",
+    "bom_markdown_path": "C:\\Users\\DELL INSPIRON 5515\\.gemini\\antigravity\\scratch\\embedded_hil_studio\\artifacts\\wiring\\benchmark_1_microclimate_bom.md",
+    "firmware_dir": "C:\\Users\\DELL INSPIRON 5515\\.gemini\\antigravity\\scratch\\embedded_hil_studio\\artifacts\\firmware\\benchmark_1_microclimate",
+    "firmware_build": {
+      "unit_tests_passed": true,
+      "mcu_syntax_verified": true,
+      "stdout_summary": "[NATIVE_TDD_PASS] All 5 C++17 firmware test suites passed with 0 errors."
+    },
+    "hil_result": {
+      "benchmark_id": "benchmark_1_microclimate",
+      "passed": true,
+      "duration_sim_s": 120.0,
+      "settling_time_s": 11.1,
+      "steady_state_error": 0.368,
+      "max_overshoot": 0.78,
+      "collisions": 0,
+      "failsafe_latency_ms": 0.0,
+      "mode_switch_verified": true,
+      "frames_captured": 2400,
+      "crc_errors": 0,
+      "assertions": {
+        "settled_within_2pct": true,
+        "zero_overshoot_hazard": true,
+        "failsafe_under_500ms": true,
+        "post_fault_recovery": true,
+        "zero_crc_errors": true
+      },
+      "details": [
+        "Settling time (\u00b12% RH): 11.1s",
+        "Mean steady-state error (60-92s): 0.368% RH",
+        "Max overshoot above 75.0% RH: 0.780% RH",
+        "SHT31 disconnect -> FAILSAFE shutoff latency: 0 ms"
+      ]
+    }
+  },
+  {
+    "project_id": "benchmark_2_rover",
+    "name": "Dual-Mode Ultrasonic Obstacle-Avoiding Rover",
+    "board": "Arduino Uno R3 (ATmega328P)",
+    "initial_drc": {
+      "passed": false,
+      "error_count": 3,
+      "warning_count": 2,
+      "violations": [
+        {
+          "severity": "error",
+          "rule_id": "DRC_UNO_TIMER1_SERVO_PWM",
+          "peripheral_id": "l298n_drive",
+          "pin_id": "D9",
+          "message": "PWM signal 'l298n_drive.ENA' is assigned to D9 (Timer1), which conflicts with Servo Timer1 ISR (analogWrite disabled on D9/D10).",
+          "recommendation": "Move PWM channel to Timer0 (D5, D6) or Timer2 (D3, D11)."
+        },
+        {
+          "severity": "error",
+          "rule_id": "DRC_UNO_TIMER1_SERVO_PWM",
+          "peripheral_id": "l298n_drive",
+          "pin_id": "D10",
+          "message": "PWM signal 'l298n_drive.ENB' is assigned to D10 (Timer1), which conflicts with Servo Timer1 ISR (analogWrite disabled on D9/D10).",
+          "recommendation": "Move PWM channel to Timer0 (D5, D6) or Timer2 (D3, D11)."
+        },
+        {
+          "severity": "warning",
+          "rule_id": "DRC_UNO_HW_UART_SHARED",
+          "peripheral_id": "bt_hc05",
+          "pin_id": "D0",
+          "message": "Pin D0 shares hardware UART0 with USB Serial/bootloader flashing for 'bt_hc05.MCU_RX_FROM_BT_TX'.",
+          "recommendation": "Disconnect peripheral TX during firmware upload or isolate with a 1k\u03a9 series resistor."
+        },
+        {
+          "severity": "warning",
+          "rule_id": "DRC_UNO_HW_UART_SHARED",
+          "peripheral_id": "bt_hc05",
+          "pin_id": "D1",
+          "message": "Pin D1 shares hardware UART0 with USB Serial/bootloader flashing for 'bt_hc05.MCU_TX_TO_BT_RX'.",
+          "recommendation": "Disconnect peripheral TX during firmware upload or isolate with a 1k\u03a9 series resistor."
+        },
+        {
+          "severity": "error",
+          "rule_id": "DRC_PIN_COLLISION",
+          "peripheral_id": "l298n_drive",
+          "pin_id": "D9",
+          "message": "Electrical pin collision on D9 contended by: l298n_drive.ENA, pan_servo.SERVO_SIG.",
+          "recommendation": "Assign dedicated pins to non-bus signals and unique CS lines."
+        }
+      ]
+    },
+    "final_drc": {
+      "passed": true,
+      "error_count": 0,
+      "warning_count": 2,
+      "violations": [
+        {
+          "severity": "warning",
+          "rule_id": "DRC_UNO_HW_UART_SHARED",
+          "peripheral_id": "bt_hc05",
+          "pin_id": "D0",
+          "message": "Pin D0 shares hardware UART0 with USB Serial/bootloader flashing for 'bt_hc05.MCU_RX_FROM_BT_TX'.",
+          "recommendation": "Disconnect peripheral TX during firmware upload or isolate with a 1k\u03a9 series resistor."
+        },
+        {
+          "severity": "warning",
+          "rule_id": "DRC_UNO_HW_UART_SHARED",
+          "peripheral_id": "bt_hc05",
+          "pin_id": "D1",
+          "message": "Pin D1 shares hardware UART0 with USB Serial/bootloader flashing for 'bt_hc05.MCU_TX_TO_BT_RX'.",
+          "recommendation": "Disconnect peripheral TX during firmware upload or isolate with a 1k\u03a9 series resistor."
+        }
+      ]
+    },
+    "auto_repaired": true,
+    "repair_notes": [
+      "Cleared conflicting manual pin overrides on 'l298n_drive' ({'ENA': 'D9', 'ENB': 'D10'})."
+    ],
+    "power_budget": {
+      "idle_current_ma": 62.0,
+      "average_current_ma": 370.6,
+      "peak_current_ma": 1359.0,
+      "mcu_regulator_current_ma": 119.0,
+      "mcu_regulator_limit_ma": 500.0,
+      "system_voltage_v": 7.4,
+      "idle_power_w": 0.368,
+      "average_power_w": 2.466,
+      "peak_power_w": 9.003,
+      "battery_name": "2S 18650 2000mAh Li-Ion Pack",
+      "battery_capacity_mah": 2000.0,
+      "estimated_runtime_hours": 4.9,
+      "breakdown": {
+        "arduino_uno": {
+          "voltage_v": 5.0,
+          "idle_ma": 18.0,
+          "avg_ma": 42.0,
+          "peak_ma": 57.0
+        },
+        "l298n_drive": {
+          "voltage_v": 7.4,
+          "idle_ma": 24.0,
+          "avg_ma": 255.4,
+          "peak_ma": 920.0
+        },
+        "ultrasonic_front": {
+          "voltage_v": 5.0,
+          "idle_ma": 2.0,
+          "avg_ma": 7.2,
+          "peak_ma": 20.0
+        },
+        "pan_servo": {
+          "voltage_v": 5.0,
+          "idle_ma": 10.0,
+          "avg_ma": 46.0,
+          "peak_ma": 320.0
+        },
+        "bt_hc05": {
+          "voltage_v": 5.0,
+          "idle_ma": 8.0,
+          "avg_ma": 20.0,
+          "peak_ma": 42.0
+        }
+      }
+    },
+    "svg_path": "C:\\Users\\DELL INSPIRON 5515\\.gemini\\antigravity\\scratch\\embedded_hil_studio\\artifacts\\wiring\\benchmark_2_rover_wiring.svg",
+    "bom_markdown_path": "C:\\Users\\DELL INSPIRON 5515\\.gemini\\antigravity\\scratch\\embedded_hil_studio\\artifacts\\wiring\\benchmark_2_rover_bom.md",
+    "firmware_dir": "C:\\Users\\DELL INSPIRON 5515\\.gemini\\antigravity\\scratch\\embedded_hil_studio\\artifacts\\firmware\\benchmark_2_rover",
+    "firmware_build": {
+      "unit_tests_passed": true,
+      "mcu_syntax_verified": true,
+      "stdout_summary": "[NATIVE_TDD_PASS] All 5 C++17 firmware test suites passed with 0 errors."
+    },
+    "hil_result": {
+      "benchmark_id": "benchmark_2_rover",
+      "passed": true,
+      "duration_sim_s": 60.0,
+      "settling_time_s": null,
+      "steady_state_error": null,
+      "max_overshoot": null,
+      "collisions": 0,
+      "failsafe_latency_ms": 0.0,
+      "mode_switch_verified": true,
+      "frames_captured": 1200,
+      "crc_errors": 0,
+      "assertions": {
+        "zero_collisions": true,
+        "obstacle_avoidance_exercised": true,
+        "distance_traveled_gt_300cm": true,
+        "bluetooth_mode_switch_verified": true,
+        "failsafe_under_500ms": true,
+        "zero_crc_errors": true
+      },
+      "details": [
+        "Total path distance traveled: 1059.8 cm with 0 collisions",
+        "Obstacle avoidance FSM active: True",
+        "Bluetooth MANUAL/AUTO transition verified: True",
+        "HC-SR04 disconnect -> FAILSAFE brake latency: 0.0 ms"
+      ]
+    }
+  },
+  {
+    "project_id": "benchmark_3_voice_display",
+    "name": "Edge Voice & Display Node",
+    "board": "ESP32-S3 DevKitC-1 (N8R8 Octal PSRAM)",
+    "initial_drc": {
+      "passed": true,
+      "error_count": 0,
+      "warning_count": 0,
+      "violations": []
+    },
+    "final_drc": {
+      "passed": true,
+      "error_count": 0,
+      "warning_count": 0,
+      "violations": []
+    },
+    "auto_repaired": false,
+    "repair_notes": [],
+    "power_budget": {
+      "idle_current_ma": 53.3,
+      "average_current_ma": 321.87,
+      "peak_current_ma": 1064.0,
+      "mcu_regulator_current_ma": 424.0,
+      "mcu_regulator_limit_ma": 800.0,
+      "system_voltage_v": 5.0,
+      "idle_power_w": 0.181,
+      "average_power_w": 1.181,
+      "peak_power_w": 4.599,
+      "battery_name": "1S2P LiPo 3000mAh + 5V Boost UPS",
+      "battery_capacity_mah": 3000.0,
+      "estimated_runtime_hours": 10.01,
+      "breakdown": {
+        "esp32_s3_devkitc": {
+          "voltage_v": 3.3,
+          "idle_ma": 28.0,
+          "avg_ma": 187.0,
+          "peak_ma": 327.0
+        },
+        "inmp441_mic": {
+          "voltage_v": 3.3,
+          "idle_ma": 0.5,
+          "avg_ma": 1.4,
+          "peak_ma": 2.0
+        },
+        "max98357a_amp": {
+          "voltage_v": 5.0,
+          "idle_ma": 2.8,
+          "avg_ma": 70.07,
+          "peak_ma": 640.0
+        },
+        "ili9341_tft": {
+          "voltage_v": 3.3,
+          "idle_ma": 22.0,
+          "avg_ma": 63.4,
+          "peak_ma": 95.0
+        }
+      }
+    },
+    "svg_path": "C:\\Users\\DELL INSPIRON 5515\\.gemini\\antigravity\\scratch\\embedded_hil_studio\\artifacts\\wiring\\benchmark_3_voice_display_wiring.svg",
+    "bom_markdown_path": "C:\\Users\\DELL INSPIRON 5515\\.gemini\\antigravity\\scratch\\embedded_hil_studio\\artifacts\\wiring\\benchmark_3_voice_display_bom.md",
+    "firmware_dir": "C:\\Users\\DELL INSPIRON 5515\\.gemini\\antigravity\\scratch\\embedded_hil_studio\\artifacts\\firmware\\benchmark_3_voice_display",
+    "firmware_build": {
+      "unit_tests_passed": true,
+      "mcu_syntax_verified": true,
+      "stdout_summary": "[NATIVE_TDD_PASS] All 5 C++17 firmware test suites passed with 0 errors."
+    },
+    "hil_result": {
+      "benchmark_id": "benchmark_3_voice_display",
+      "passed": true,
+      "duration_sim_s": 30.0,
+      "settling_time_s": null,
+      "steady_state_error": null,
+      "max_overshoot": null,
+      "collisions": 0,
+      "failsafe_latency_ms": 0.0,
+      "mode_switch_verified": true,
+      "frames_captured": 750,
+      "crc_errors": 0,
+      "assertions": {
+        "vad_tft_wake_verified": true,
+        "agc_bounded_safely": true,
+        "i2s_stall_failsafe_under_500ms": true,
+        "zero_crc_errors": true
+      },
+      "details": [
+        "Voice-active high-brightness TFT frames: 379, dim idle frames: 321",
+        "I2S stream stall -> FAILSAFE mute latency: 0.0 ms"
+      ]
+    }
+  }
+]

@@ -1,0 +1,117 @@
+board_id: arduino_uno
+name: Arduino Uno R3 (ATmega328P)
+mcu: ATmega328P
+pio_board: uno
+pio_platform: atmelavr
+pio_framework: arduino
+logic_voltage: 5.0
+max_pin_current_safe_ma: 20.0
+max_pin_current_abs_ma: 40.0
+max_regulator_current_ma: 500.0
+base_idle_current_ma: 18.0
+base_active_current_ma: 42.0
+wifi_active_extra_ma: 0.0
+wifi_peak_extra_ma: 0.0
+supports_wifi: false
+flexible_pin_matrix: false
+pins:
+  - pin_id: D0
+    gpio_num: 0
+    label: D0 (PD0 / RX)
+    capabilities: [GPIO_IN, GPIO_OUT, UART_RX]
+    hardware_uart: true
+  - pin_id: D1
+    gpio_num: 1
+    label: D1 (PD1 / TX)
+    capabilities: [GPIO_IN, GPIO_OUT, UART_TX]
+    hardware_uart: true
+  - pin_id: D2
+    gpio_num: 2
+    label: D2 (PD2 / INT0)
+    capabilities: [GPIO_IN, GPIO_OUT, SERVO]
+  - pin_id: D3
+    gpio_num: 3
+    label: D3 (PD3 / OC2B PWM)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM, SERVO]
+    timer_group: Timer2
+  - pin_id: D4
+    gpio_num: 4
+    label: D4 (PD4)
+    capabilities: [GPIO_IN, GPIO_OUT, SERVO]
+  - pin_id: D5
+    gpio_num: 5
+    label: D5 (PD5 / OC0B PWM)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM, SERVO]
+    timer_group: Timer0
+  - pin_id: D6
+    gpio_num: 6
+    label: D6 (PD6 / OC0A PWM)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM, SERVO]
+    timer_group: Timer0
+  - pin_id: D7
+    gpio_num: 7
+    label: D7 (PD7)
+    capabilities: [GPIO_IN, GPIO_OUT, SERVO]
+  - pin_id: D8
+    gpio_num: 8
+    label: D8 (PB0)
+    capabilities: [GPIO_IN, GPIO_OUT, SERVO]
+  - pin_id: D9
+    gpio_num: 9
+    label: D9 (PB1 / OC1A PWM)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM, SERVO]
+    timer_group: Timer1
+  - pin_id: D10
+    gpio_num: 10
+    label: D10 (PB2 / OC1B PWM / SS)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM, SPI_CS, SERVO]
+    timer_group: Timer1
+    bus_roles: {SPI0: CS}
+  - pin_id: D11
+    gpio_num: 11
+    label: D11 (PB3 / OC2A PWM / MOSI)
+    capabilities: [GPIO_IN, GPIO_OUT, PWM, SPI_MOSI, SERVO]
+    timer_group: Timer2
+    bus_roles: {SPI0: MOSI}
+  - pin_id: D12
+    gpio_num: 12
+    label: D12 (PB4 / MISO)
+    capabilities: [GPIO_IN, GPIO_OUT, SPI_MISO, SERVO]
+    bus_roles: {SPI0: MISO}
+  - pin_id: D13
+    gpio_num: 13
+    label: D13 (PB5 / SCK / LED)
+    capabilities: [GPIO_IN, GPIO_OUT, SPI_SCK, SERVO]
+    bus_roles: {SPI0: SCK}
+  - pin_id: A0
+    gpio_num: 14
+    label: A0 (PC0 / ADC0)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC]
+    adc_unit: ADC1
+  - pin_id: A1
+    gpio_num: 15
+    label: A1 (PC1 / ADC1)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC]
+    adc_unit: ADC1
+  - pin_id: A2
+    gpio_num: 16
+    label: A2 (PC2 / ADC2)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC]
+    adc_unit: ADC1
+  - pin_id: A3
+    gpio_num: 17
+    label: A3 (PC3 / ADC3)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC]
+    adc_unit: ADC1
+  - pin_id: A4
+    gpio_num: 18
+    label: A4 (PC4 / ADC4 / SDA)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, I2C_SDA]
+    adc_unit: ADC1
+    bus_roles: {I2C0: SDA}
+  - pin_id: A5
+    gpio_num: 19
+    label: A5 (PC5 / ADC5 / SCL)
+    capabilities: [GPIO_IN, GPIO_OUT, ADC, I2C_SCL]
+    adc_unit: ADC1
+    bus_roles: {I2C0: SCL}

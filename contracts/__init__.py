@@ -1,0 +1,43 @@
+"""Core Pydantic v2 contracts for Embedded Hardware Architect & Serial HIL Studio."""
+
+from .hw_models import (
+    BatterySpec,
+    BoardDef,
+    BomItem,
+    ControlCommand,
+    ControlProfileSpec,
+    DrcReport,
+    DrcViolation,
+    EmbeddedProjectSpec,
+    HardwareBlueprint,
+    HilAssertionResult,
+    PeripheralSpec,
+    PinAllocation,
+    PinAssignment,
+    PinCapability,
+    PowerBudget,
+    ProjectSpec,
+    SignalReq,
+    TelemetryFrame,
+)
+
+__all__ = [
+    "BatterySpec",
+    "BoardDef",
+    "BomItem",
+    "ControlCommand",
+    "ControlProfileSpec",
+    "DrcReport",
+    "DrcViolation",
+    "EmbeddedProjectSpec",
+    "HardwareBlueprint",
+    "HilAssertionResult",
+    "PeripheralSpec",
+    "PinAllocation",
+    "PinAssignment",
+    "PinCapability",
+    "PowerBudget",
+    "ProjectSpec",
+    "SignalReq",
+    "TelemetryFrame",
+]

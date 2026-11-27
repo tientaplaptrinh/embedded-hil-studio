@@ -1,0 +1,161 @@
+{
+  "passed": true,
+  "failsafe_ui_latency_s": 0.3147,
+  "console_errors": [],
+  "events": [
+    {
+      "timestamp_utc": "2026-11-27T04:24:02.098814+00:00",
+      "failsafe_enabled": true,
+      "action": "verify_continuous_telemetry",
+      "frames_t0": 90,
+      "frames_t1": 138,
+      "pv_t0": 58.78,
+      "screenshot": "C:\\Users\\DELL INSPIRON 5515\\.gemini\\antigravity\\scratch\\embedded_hil_studio\\artifacts\\gui_audit\\01_live_oscilloscope_streaming.png"
+    },
+    {
+      "timestamp_utc": "2026-11-27T04:24:02.390982+00:00",
+      "failsafe_enabled": true,
+      "action": "safe_mouse_click",
+      "label": "Focus Setpoint Slider",
+      "selector": "[data-testid=\"slider-setpoint\"]",
+      "driver": "playwright_window_confined_pointer",
+      "viewport_xy": [
+        1047.3,
+        223.0
+      ],
+      "screen_xy": [
+        1689,
+        468
+      ],
+      "window_bounds": {
+        "left": 105,
+        "top": 67,
+        "right": 2052,
+        "bottom": 1258
+      }
+    },
+    {
+      "timestamp_utc": "2026-11-27T04:24:02.456568+00:00",
+      "failsafe_enabled": true,
+      "action": "safe_keyboard_press",
+      "key": "ArrowRight",
+      "repeats": 10
+    },
+    {
+      "timestamp_utc": "2026-11-27T04:24:02.736462+00:00",
+      "failsafe_enabled": true,
+      "action": "safe_mouse_click",
+      "label": "Set SP 86 via UI",
+      "selector": "[data-testid=\"btn-sp-86\"]",
+      "driver": "playwright_window_confined_pointer",
+      "viewport_xy": [
+        1170.4,
+        256.4
+      ],
+      "screen_xy": [
+        1874,
+        513
+      ],
+      "window_bounds": {
+        "left": 105,
+        "top": 67,
+        "right": 2052,
+        "bottom": 1258
+      }
+    },
+    {
+      "timestamp_utc": "2026-11-27T04:24:05.067173+00:00",
+      "failsafe_enabled": true,
+      "action": "verify_setpoint_response",
+      "new_sp": 86.0,
+      "pv_before": 68.19,
+      "pv_after": 76.16,
+      "screenshot": "C:\\Users\\DELL INSPIRON 5515\\.gemini\\antigravity\\scratch\\embedded_hil_studio\\artifacts\\gui_audit\\02_setpoint_shift_tracked_response.png"
+    },
+    {
+      "timestamp_utc": "2026-11-27T04:24:05.353347+00:00",
+      "failsafe_enabled": true,
+      "action": "safe_mouse_click",
+      "label": "Inject Sensor Disconnect",
+      "selector": "[data-testid=\"btn-inject-disconnect\"]",
+      "driver": "playwright_window_confined_pointer",
+      "viewport_xy": [
+        1047.3,
+        594.4
+      ],
+      "screen_xy": [
+        1689,
+        969
+      ],
+      "window_bounds": {
+        "left": 105,
+        "top": 67,
+        "right": 2052,
+        "bottom": 1258
+      }
+    },
+    {
+      "timestamp_utc": "2026-11-27T04:24:05.510058+00:00",
+      "failsafe_enabled": true,
+      "action": "verify_failsafe_badge_under_1s",
+      "latency_s": 0.3147,
+      "screenshot": "C:\\Users\\DELL INSPIRON 5515\\.gemini\\antigravity\\scratch\\embedded_hil_studio\\artifacts\\gui_audit\\03_failsafe_sensor_disconnect.png"
+    },
+    {
+      "timestamp_utc": "2026-11-27T04:24:05.787217+00:00",
+      "failsafe_enabled": true,
+      "action": "safe_mouse_click",
+      "label": "Restore Sensor & Reset Fault",
+      "selector": "[data-testid=\"btn-restore-sensor\"]",
+      "driver": "playwright_window_confined_pointer",
+      "viewport_xy": [
+        1047.3,
+        642.4
+      ],
+      "screen_xy": [
+        1689,
+        1034
+      ],
+      "window_bounds": {
+        "left": 105,
+        "top": 67,
+        "right": 2052,
+        "bottom": 1258
+      }
+    },
+    {
+      "timestamp_utc": "2026-11-27T04:24:05.906279+00:00",
+      "failsafe_enabled": true,
+      "action": "verify_sensor_restore",
+      "screenshot": "C:\\Users\\DELL INSPIRON 5515\\.gemini\\antigravity\\scratch\\embedded_hil_studio\\artifacts\\gui_audit\\04_sensor_restored_auto.png"
+    },
+    {
+      "timestamp_utc": "2026-11-27T04:24:06.203471+00:00",
+      "failsafe_enabled": true,
+      "action": "safe_mouse_click",
+      "label": "Open Pinout & DRC Inspector Tab",
+      "selector": "[data-testid=\"tab-pinout\"]",
+      "driver": "playwright_window_confined_pointer",
+      "viewport_xy": [
+        405.8,
+        89.6
+      ],
+      "screen_xy": [
+        727,
+        288
+      ],
+      "window_bounds": {
+        "left": 105,
+        "top": 67,
+        "right": 2052,
+        "bottom": 1258
+      }
+    },
+    {
+      "timestamp_utc": "2026-11-27T04:24:06.756108+00:00",
+      "failsafe_enabled": true,
+      "action": "verify_pinout_svg_tab",
+      "screenshot": "C:\\Users\\DELL INSPIRON 5515\\.gemini\\antigravity\\scratch\\embedded_hil_studio\\artifacts\\gui_audit\\05_pinout_drc_svg_inspector.png"
+    }
+  ]
+}
