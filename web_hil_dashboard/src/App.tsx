@@ -69,27 +69,30 @@ export default function App() {
     let cancelled = false;
 
     const bootstrap = async () => {
-      try {
-        const ctrl = new AbortController();
-        const timer = window.setTimeout(() => ctrl.abort(), 2200);
-        const healthRes = await fetch("./api/health", { signal: ctrl.signal, cache: "no-store" });
-        window.clearTimeout(timer);
+      const isStaticCdnHost = window.location.hostname.endsWith(".github.io");
+      if (!isStaticCdnHost) {
+        try {
+          const ctrl = new AbortController();
+          const timer = window.setTimeout(() => ctrl.abort(), 2200);
+          const healthRes = await fetch("./api/health", { signal: ctrl.signal, cache: "no-store" });
+          window.clearTimeout(timer);
 
-        if (healthRes.ok) {
-          const [bmRes, bpRes] = await Promise.all([
-            fetch("./api/benchmarks"),
-            fetch("./api/blueprint"),
-          ]);
-          if (!cancelled && bmRes.ok && bpRes.ok) {
-            setBenchmarks(await bmRes.json());
-            const bp: BlueprintResponse = await bpRes.json();
-            applyBlueprintState(bp, false);
-            setStandaloneMode(false);
-            return;
+          if (healthRes.ok) {
+            const [bmRes, bpRes] = await Promise.all([
+              fetch("./api/benchmarks"),
+              fetch("./api/blueprint"),
+            ]);
+            if (!cancelled && bmRes.ok && bpRes.ok) {
+              setBenchmarks(await bmRes.json());
+              const bp: BlueprintResponse = await bpRes.json();
+              applyBlueprintState(bp, false);
+              setStandaloneMode(false);
+              return;
+            }
           }
+        } catch {
+          // Backend not present -> activate Standalone Cloud Web-HIL mode
         }
-      } catch {
-        // Backend not present on static host -> activate Standalone Cloud Web-HIL mode
       }
 
       const staticRes = await fetch("./static_blueprints.json");
